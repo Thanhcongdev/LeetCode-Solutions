@@ -3,9 +3,7 @@ class Solution:
         num = nums[0]
         index = 0
         for i in range(1, len(nums)):
-            if nums[i] == num:
-                continue
-            else:
+            if nums[i] != num:
                 num = nums[i]
                 index += 1
                 nums[index] = num
