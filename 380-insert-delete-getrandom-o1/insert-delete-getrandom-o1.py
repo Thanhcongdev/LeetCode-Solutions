@@ -5,9 +5,7 @@ class RandomizedSet:
         self.dict_ = defaultdict(int)
 
     def search(self, val):
-        if val not in self.dict_:
-            return False
-        elif self.dict_[val] == 0:
+        if self.dict_[val] == 0:
             return False
         return True
     def insert(self, val: int) -> bool:
@@ -17,6 +15,7 @@ class RandomizedSet:
         return True
 
     def remove(self, val: int) -> bool:
+        self.dict_[val] += 0
         if not self.search(val):
             return False
         self.dict_[val] -= 1
