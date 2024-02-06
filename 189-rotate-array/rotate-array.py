@@ -5,8 +5,7 @@ class Solution(object):
         if k == 0:
             return nums
         if len(nums)<k:
-            nums[:] = Solution.rotate(self,nums,len(nums))
-            nums[:] = Solution.rotate(self,nums,k-len(nums))
+            k = k%len(nums)
         nums.reverse()
         nums[:k] = reversed(nums[:k])
         nums[k:] = reversed(nums[k:])
