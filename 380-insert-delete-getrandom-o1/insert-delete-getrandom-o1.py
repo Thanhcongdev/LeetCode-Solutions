@@ -2,7 +2,7 @@ import random
 class RandomizedSet:
 
     def __init__(self):
-        self.dict_ = defaultdict(int)
+        self.dict_ = {}
 
     def search(self, val):
         if val not in self.dict_:
@@ -11,7 +11,7 @@ class RandomizedSet:
     def insert(self, val: int) -> bool:
         if self.search(val):
             return False
-        self.dict_[val] += 1
+        self.dict_[val] = 1
         return True
 
     def remove(self, val: int) -> bool:
