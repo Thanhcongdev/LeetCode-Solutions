@@ -3,11 +3,11 @@ class Solution:
         n = len(nums)
         pre_product = 1
         post_product = 1
-        res = [0]*n
-        for i in range(n):
-            res[i] = pre_product
+        res = [1]*n
+        for i in range(n-1):
             pre_product *= nums[i]
-        for i in range(n)[::-1]:
+            res[i+1] = pre_product
+        for i in range(n-1)[::-1]:
+            post_product *= nums[i+1]
             res[i] *= post_product
-            post_product *= nums[i]
         return res
