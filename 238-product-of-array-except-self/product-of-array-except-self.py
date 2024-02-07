@@ -7,7 +7,7 @@ class Solution:
         for i in range(n):
             res[i] = pre_product
             pre_product *= nums[i]
-        for i in range(n-1, -1, -1):
+        for i in range(n)[::-1]:
             res[i] *= post_product
             post_product *= nums[i]
         return res
