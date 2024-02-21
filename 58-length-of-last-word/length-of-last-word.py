@@ -1,5 +1,13 @@
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
         s = s.strip()
-        last_word = s[s.rfind(' ') + 1:]
-        return len(last_word)
+        pos = 0
+        for i, ch in enumerate(s[::-1]):
+            if ch == " ":
+                pos = i
+                break
+        if pos == 0:
+            return len(s)
+        return pos 
+            
+                
