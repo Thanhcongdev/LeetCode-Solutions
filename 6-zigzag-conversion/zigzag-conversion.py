@@ -1,10 +1,11 @@
 class Solution:
     def convert(self, s: str, numRows: int) -> str:
+        if numRows == 1:
+            return s
         rows = [[] for _ in range(numRows)]
         direction = -1
         index_row = 0
-        if numRows == 1:
-            return s
+        
         for ch in s:
             rows[index_row].append(ch)
             if index_row == 0:
