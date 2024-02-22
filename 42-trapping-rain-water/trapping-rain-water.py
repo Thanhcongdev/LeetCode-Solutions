@@ -1,35 +1,26 @@
 class Solution:
+    def jump(self, max_top, height):
+        ans = 0
+        top = 0
+        end = -1
+        for i in range(len(height)):
+            if height[i] == max_top:
+                end = i
+                break
+            if height[i] > top:
+                top = height[i]
+            else:
+                ans += top - height[i]
+        return ans, end
     def trap(self, height: List[int]) -> int:
-        trappedRain = []
-        left, right = 0, len(height) - 1
-
-        leftBoundary, rightBoundary = 0, 0
-        while left < right:
-            tempTrapped = 0
-
-            while height[left] < leftBoundary or height[left] == 0:
-                left += 1
-            while height[right] < rightBoundary or height[right] == 0:
-                right -= 1
-
-            leftBoundary = height[left]
-            rightBoundary = height[right]
-
-            while height[left] >= height[right] and left != right:
-                right -= 1
-
-                if height[right] > rightBoundary:
-                    rightBoundary = height[right]
-                else:
-                    tempTrapped += min(leftBoundary, rightBoundary) - height[right]
-
-            while height[left] < height[right] and left != right:
-                left += 1
-
-                if height[left] > leftBoundary:
-                    leftBoundary = height[left]
-                else:
-                    tempTrapped += min(leftBoundary, rightBoundary) - height[left]
-            
-            trappedRain.append(tempTrapped)
-        return sum(trappedRain)
+        max_top = max(height)
+        ans = 0
+        residual, end1 = self.jump(max_top, height)
+        ans += residual
+        residual, end2 = self.jump(max_top, height[::-1])
+        end2 =  len(height) - end2 - 1
+        ans += residual
+        if end1 != end2:
+            for i in range(end1+1, end2):
+                ans += max_top - height[i]
+        return ans
