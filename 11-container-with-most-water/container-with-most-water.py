@@ -8,8 +8,8 @@ class Solution:
             maxArea = max(curArea, maxArea)
             print(l,r)
             if height[l] == maxHeight and height[l] == height[r]:
-                curArea = min(height[l], height[r]) * (r-l)
-                maxArea = max(curArea, maxArea)
+                # curArea = min(height[l], height[r]) * (r-l)
+                # maxArea = max(curArea, maxArea)
                 return maxArea
             if height[l] < height[r]:
                 l += 1
