@@ -3,11 +3,18 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        n = len(matrix)
-        for i in range(n):
-            for j in range(i):
-                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
-        print(matrix)
-        for i in range(n):
-            for j in range(n//2):
-                matrix[i][j], matrix[i][n-j-1] = matrix[i][n-j-1], matrix[i][j]
+        def transpose(matrix):
+            for i in range(len(matrix)):
+                for j in range(i, len(matrix[0])):
+                    matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+        def reverse_rows(matrix):
+            for r in range(len(matrix)):
+                left, right = 0, len(matrix) - 1
+                while left < right:
+                    matrix[r][left], matrix[r][right] = matrix[r][right], matrix[r][left]
+                    left += 1
+                    right -= 1
+
+        transpose(matrix)
+        reverse_rows(matrix)
