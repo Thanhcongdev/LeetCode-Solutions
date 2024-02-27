@@ -7,24 +7,25 @@ class Solution:
         words_map = Counter(words)
         res = []
         for i in range(word_len):
-            left = i
-            right = i
+            left, right = i, i
             cur_map = defaultdict(int)
             count = 0
             while right + word_len <= len(s):
-                word = s[right:right + word_len]
+                word = s[right:right+word_len]
                 right += word_len
+                print(word)
                 if word in words_map:
                     cur_map[word] += 1
                     count += 1
                     while cur_map[word] > words_map[word]:
-                        cur_map[s[left:left + word_len]] -= 1
+                        tmp_word = s[left:left+word_len]
+                        cur_map[tmp_word] -= 1
                         left += word_len
                         count -= 1
                     if count == words_len:
                         res.append(left)
                 else:
                     cur_map.clear()
-                    count = 0
                     left = right
+                    count = 0
         return res
