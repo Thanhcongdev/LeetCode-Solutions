@@ -1,11 +1,14 @@
 class Solution:
-    def combine(self, n: int, k: int):
-        res = []
-        self.dfs(range(1, n + 1), k, 0, [], res)
-        return res
-    def dfs(self, nums, k, index, path, res):
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        ans = []
+        self.dfs(1, [], k, n, ans)
+        return ans
+    def dfs(self, idx, comb, k, n, ans):
         if k == 0:
-            res.append(path)
+            ans.append(comb[:])
             return
-        for i in range(index, len(nums)):
-            self.dfs(nums, k - 1, i + 1, path + [nums[i]], res)
+        for i in range(idx, n + 1):
+            comb.append(i)
+            self.dfs(i + 1, comb, k - 1, n, ans)
+            comb.pop()
+        
