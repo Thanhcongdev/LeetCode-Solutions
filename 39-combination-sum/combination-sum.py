@@ -1,15 +1,13 @@
 class Solution(object):
     def combinationSum(self, candidates, target):
-        def backtrack(start, target, path):
+        def dfs(start, target, comb):
             if target == 0:
-                result.append(path)
+                res.append(comb)
                 return
-            if target < 0:
+            elif target < 0:
                 return
             for i in range(start, len(candidates)):
-                backtrack(i, target - candidates[i], path + [candidates[i]])
-
-        result = []
-        # candidates.sort()
-        backtrack(0, target, [])
-        return result
+                dfs(i, target - candidates[i], comb + [candidates[i]])
+        res = []
+        dfs(0, target, [])
+        return res        
