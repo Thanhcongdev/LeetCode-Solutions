@@ -6,7 +6,9 @@ class Solution:
             else:
                 for i in range(start, len(nums)):
                     nums[start], nums[i] = nums[i], nums[start]
+                    print(i, start)
                     backtrack(start + 1)
+                    
                     nums[start], nums[i] = nums[i], nums[start]
 
         permutations = []
