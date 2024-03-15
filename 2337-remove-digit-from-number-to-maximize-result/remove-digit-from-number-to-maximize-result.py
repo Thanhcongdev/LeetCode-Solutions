@@ -1,16 +1,14 @@
 class Solution:
     def removeDigit(self, number: str, digit: str) -> str:
+        arr = []
         n = len(number)
-        for x in range(1, n):
-            prev, cur = number[x-1], number[x]
-            if prev == digit:
-                last_ind = x-1
-                if cur > prev:
-                    ind = x - 1
-                    return number[:ind] + number[ind+1:]
-        else:
-            if number[-1] == digit:
-                last_ind = n-1
-            if last_ind < n-1:
-                return number[:last_ind] + number[last_ind+1:]
-            return number[:last_ind]
+        for i in range(n-1):
+          if number[i] == digit:
+            last = i
+            a = int(number[i])
+            b = int(number[i + 1])
+            if a < b:
+              return number[:i] + number[i+1:] 
+        if number[-1] == digit:
+          last = n - 1
+        return number[:last] + number[last+1:] 
