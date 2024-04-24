@@ -18,7 +18,6 @@ class Solution:
             j = n // 2
             mean1 = chunk1[i] if m % 2 == 0 else sum(chunk1[i:i+2]) / 2
             mean2 = chunk2[j] if n % 2 == 0 else sum(chunk2[j:j+2]) / 2
-            print("#",mean1,mean2)
             if mean1 >= mean2:
                 if n % 2 != 0:
                     j += 1
