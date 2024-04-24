@@ -10,7 +10,7 @@ class Solution:
                 return (float(middle1) + float(middle2)) / 2.0
         def compare_half(chunk1, chunk2, m, n):
             print(chunk1, chunk2, m, n)
-            if m < 2 and n < 2:
+            if m < 2 or n < 2:
                 merged = nums1 + nums2
                 merged.sort()
                 return findmeadian(merged)
