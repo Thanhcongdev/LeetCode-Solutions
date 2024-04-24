@@ -1,37 +1,47 @@
 class Solution:
-    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
-        def findmeadian(merged):
-            total = len(merged)
-            if total % 2 == 1:
-                return float(merged[total // 2])
+    def findMedianSortedArrays(self, nums1, nums2):
+        n1 = len(nums1)
+        n2 = len(nums2)
+        
+        # Ensure nums1 is the smaller array for simplicity
+        if n1 > n2:
+            return self.findMedianSortedArrays(nums2, nums1)
+        
+        n = n1 + n2
+        left = (n1 + n2 + 1) // 2 # Calculate the left partition size
+        low = 0
+        high = n1
+        
+        while low <= high:
+            mid1 = (low + high) // 2 # Calculate mid index for nums1
+            mid2 = left - mid1 # Calculate mid index for nums2
+            
+            l1 = float('-inf')
+            l2 = float('-inf')
+            r1 = float('inf')
+            r2 = float('inf')
+            
+            # Determine values of l1, l2, r1, and r2
+            if mid1 < n1:
+                r1 = nums1[mid1]
+            if mid2 < n2:
+                r2 = nums2[mid2]
+            if mid1 - 1 >= 0:
+                l1 = nums1[mid1 - 1]
+            if mid2 - 1 >= 0:
+                l2 = nums2[mid2 - 1]
+            
+            if l1 <= r2 and l2 <= r1:
+                # The partition is correct, we found the median
+                if n % 2 == 1:
+                    return max(l1, l2)
+                else:
+                    return (max(l1, l2) + min(r1, r2)) / 2.0
+            elif l1 > r2:
+                # Move towards the left side of nums1
+                high = mid1 - 1
             else:
-                middle1 = merged[total // 2 - 1]
-                middle2 = merged[total // 2]
-                return (float(middle1) + float(middle2)) / 2.0
-        def compare_half(chunk1, chunk2, m, n):
-            print(chunk1, chunk2, m, n)
-            if m < 2 or n < 2:
-                merged = nums1 + nums2
-                merged.sort()
-                return findmeadian(merged)
-            i = m // 2
-            j = n // 2
-            mean1 = chunk1[i] if m % 2 == 0 else sum(chunk1[i:i+2]) / 2
-            mean2 = chunk2[j] if n % 2 == 0 else sum(chunk2[j:j+2]) / 2
-            if mean1 >= mean2:
-                if n % 2 != 0:
-                    j += 1
-                return compare_half(chunk1[:i+1], chunk2[j:], m // 2, n // 2)
-            else:
-                if m % 2 != 0:
-                    i += 1
-                return compare_half(chunk1[i:], chunk2[:j+1], m // 2, n // 2)
-
-        m, n = len(nums1) - 1, len(nums2) - 1
-        if m < 0:
-            return findmeadian(nums2)
-        if n < 0:
-            return findmeadian(nums1)
-
-        num = compare_half(nums1, nums2, m, n)
-        return num
+                # Move towards the right side of nums1
+                low = mid1 + 1
+        
+        return 0 # If the code reaches here, the input arrays were not sorted.
